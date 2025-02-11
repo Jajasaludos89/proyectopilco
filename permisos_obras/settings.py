@@ -10,7 +10,7 @@ SECRET_KEY = os.environ.get('secret_key', default='scf6f6f6f6f6f6f6f6f')
 DEBUG = 'RENDER' not in os.environ
 
 # Allowed hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['proyectopilco.onrender.com']
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
