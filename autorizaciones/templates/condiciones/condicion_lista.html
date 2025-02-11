@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="//cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet"  href="//cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css">
+    <script  src="//cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+    <script  src="//cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+    <title>Lista de Condiciones</title>
+    <link rel="stylesheet">
+
+    <style>
+      .btn {
+          background-color: #8b5e3c;
+          color: white;
+          padding: 8px 12px;
+          text-decoration: none;
+          border-radius: 5px;
+          display: inline-block;
+          transition: background 0.3s, transform 0.2s;
+      }
+  
+      .btn:hover {
+          background-color: #a0744f;
+          transform: scale(1.05);
+      }
+  
+      .btn-danger {
+          background-color: #b33a3a;
+      }
+  
+      .btn-danger:hover {
+          background-color: #a32a2a;
+          transform: scale(1.05);
+      }
+  </style>
+  
+  
+</head>
+<body>
+
+  
+    <main>
+        <section>
+            <h2>Lista de Condiciones</h2>
+            <a href="{% url 'crear_condicion' %}" class="btn">Crear nueva condición</a>
+
+            <table class="table table-bordered table-striped table-hover" id="tbl_condicion">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Proyecto</th>
+                        <th>Municipio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for condicion in condiciones %}
+                    <tr>
+                        <td>{{ condicion.nombre }}</td>
+                        <td>{{ condicion.proyecto }}</td>
+                        <td>{{ condicion.municipio }}</td>
+                        <td>
+                          <a href="{% url 'editar_condicion' condicion.pk %}" class="btn">Editar</a> | 
+                          <a href="{% url 'eliminar_condicion' condicion.pk %}" class="btn btn-danger">Eliminar</a>
+                      </td>
+                      
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            $('#tbl_condicion').DataTable();
+        });
+    </script>
+
+</body>
+</html>
+{% endblock %}

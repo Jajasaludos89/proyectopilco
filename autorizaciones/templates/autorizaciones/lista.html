@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="//cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet"  href="//cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css">
+    <script  src="//cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+    <script  src="//cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+    <title>Lista de Autorizaciones</title>
+    <link rel="stylesheet">
+    <style>
+        .btn {
+            background-color: #8b5e3c;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #a0744f;
+        }
+        .btn-danger {
+            background-color: #b33a3a;
+        }
+        .btn-danger:hover {
+            background-color: #d9534f;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #8b5e3c;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #a0744f;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <section>
+            <h2>Lista de Autorizaciones</h2>
+            <a href="{% url 'crear_autorizacion' %}" class="btn">Nueva Autorización</a>
+
+            <table class="table table-bordered table-striped table-hover" id="tbl_autorizacion">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Descripción</th>
+                        <th>Fecha de Emisión</th>
+                        <th>Vigente</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for autorizacion in autorizaciones %}
+                    <tr>
+                        <td>{{ autorizacion.numero }}</td>
+                        <td>{{ autorizacion.descripcion }}</td>
+                        <td>{{ autorizacion.fecha_emision }}</td>
+                        <td>{{ autorizacion.vigente|yesno:"Sí,No" }}</td>
+                        <td>
+                            <a href="{% url 'editar_autorizacion' autorizacion.id %}" class="btn">Editar</a> |
+                            <a href="{% url 'eliminar_autorizacion' autorizacion.id %}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            $('#tbl_autorizacion').DataTable();
+        });
+    </script>
+
+</body>
+</html>
+{% endblock %}
+

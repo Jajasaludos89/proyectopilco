@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="//cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet"  href="//cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css">
+    <title>Lista de Municipios</title>
+    <link rel="stylesheet">
+    <script  src="//cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+    <script  src="//cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #8b5e3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #6d4c2e;
+        }
+        .btn-danger {
+            background-color: #b33a3a;
+        }
+        .btn-danger:hover {
+            background-color: #922828;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <h2>Lista de Municipios</h2>
+            <a href="{% url 'crear_municipio' %}" class="btn">Crear Municipio</a>
+
+            <table class="table table-bordered table-striped table-hover" id="tbl_municipio">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>CID</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for municipio in municipios %}
+                    <tr>
+                        <td>{{ municipio.nombre }}</td>
+                        <td>{{ municipio.cid }}</td>
+                        <td>{{ municipio.telefono }}</td>
+                        <td>
+                            <a href="{% url 'editar_municipio' municipio.pk %}" class="btn">Editar</a> |
+                            <a href="{% url 'eliminar_municipio' municipio.pk %}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script>
+        $(document).ready(function() {
+            $('#tbl_municipio').DataTable();
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

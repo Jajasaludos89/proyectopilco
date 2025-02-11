@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="//cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet"  href="//cdn.datatables.net/2.2.1/css/dataTables.dataTables.min.css">
+    <script  src="//cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+    <script  src="//cdn.datatables.net/2.2.1/js/dataTables.min.js"></script>
+
+    <title>Lista de Proyectos</title>
+    <link rel="stylesheet">
+    <style>
+        .btn {
+            background-color: #8b5e3c;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+    
+        .btn:hover {
+            background-color: #a0744f;
+        }
+    
+        .btn-success {
+            background-color: #4CAF50;
+        }
+    
+        .btn-success:hover {
+            background-color: #45a049;
+        }
+    
+        .btn-danger {
+            background-color: #b33a3a;
+        }
+    
+        .btn-danger:hover {
+            background-color: #a32a2a;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <main>
+        <section>
+            <h2>Lista de Proyectos</h2>
+            <a href="{% url 'crear_proyecto' %}" class="btn">Nuevo Proyecto</a>
+
+            <table class="table table-bordered table-striped table-hover" id="tbl_proyecto">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Fecha de Fin</th>
+                        <th>Aprobado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for proyecto in proyectos %}
+                    <tr>
+                        <td>{{ proyecto.nombre }}</td>
+                        <td>{{ proyecto.descripcion }}</td>
+                        <td>{{ proyecto.fecha_inicio }}</td>
+                        <td>{{ proyecto.fecha_fin }}</td>
+                        <td>{{ proyecto.aprobado|yesno:"Sí,No" }}</td>
+                        <td>
+                            <a href="{% url 'editar_proyecto' proyecto.id %}" class="btn">Editar</a> |
+                            <a href="{% url 'aprobar_proyecto' proyecto.id %}" class="btn btn-success">Aprobar</a> |
+                            <a href="{% url 'eliminar_proyecto' proyecto.id %}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        
+        </section>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            $('#tbl_proyecto').DataTable();
+        });
+    </script>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if form.instance.pk %}Editar{% else %}Crear{% endif %} Autorización</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f1e4;
+            color: #5a3e1b;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #8b5e3c;
+            color: white;
+            padding: 20px;
+        }
+        main {
+            padding: 20px;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 50%;
+            margin: 0 auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #8b5e3c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        a {
+            text-decoration: none;
+            color: #8b5e3c;
+            font-weight: bold;
+        }
+        footer {
+            background-color: #8b5e3c;
+            color: white;
+            padding: 10px;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gestión de Permisos de Obras</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>{% if form.instance.pk %}Editar{% else %}Crear{% endif %} Autorización</h2>
+            
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Guardar</button>
+            </form>
+
+            <p>
+                <a href="{% url 'lista_autorizaciones' %}">Volver</a>
+            </p>
+        </section>
+    </main>
+</body>
+</html>

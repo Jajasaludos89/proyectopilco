@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if form.instance.pk %}Editar{% else %}Crear{% endif %} Condición</title>
+    <style>
+      /* Estilos generales para los botones */
+      .btn {
+          display: inline-block;
+          padding: 10px 20px;
+          font-size: 16px;
+          text-decoration: none;
+          border-radius: 5px;
+          border: none;
+          cursor: pointer;
+          transition: background 0.3s ease, transform 0.2s ease;
+      }
+
+      /* Botón Guardar (café) */
+      .btn-primary {
+          background-color: #8B5E3B; /* Café */
+          color: white;
+      }
+
+      .btn-primary:hover {
+          background-color: #734D32;
+          transform: scale(1.05);
+      }
+
+      /* Botón Volver (gris oscuro) */
+      .btn-secondary {
+          background-color: #6c757d;
+          color: white;
+      }
+
+      .btn-secondary:hover {
+          background-color: #5a6268;
+          transform: scale(1.05);
+      }
+
+      /* Estilos para centrar el contenido */
+      main {
+          text-align: center;
+          padding: 20px;
+      }
+
+      section {
+          background: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          display: inline-block;
+      }
+
+      form {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 15px;
+          width: 100%;
+          max-width: 400px;
+          margin: 0 auto;
+      }
+
+      button, a {
+          width: 100%;
+          text-align: center;
+      }
+    </style>
+</head>
+<body>
+
+    <main>
+        <section>
+            <h2>{% if form.instance.pk %}Editar{% else %}Crear{% endif %} Condición</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{% url 'lista_condiciones' %}" class="btn btn-secondary">Volver</a>
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>
+{% endblock %}
+
